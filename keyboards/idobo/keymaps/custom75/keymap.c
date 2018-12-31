@@ -16,13 +16,26 @@
 #include QMK_KEYBOARD_H
 
 // Layer shorthand
-#define _BL 0
-#define _MS 1
-#define _LD 2
+
+
+#define _PW_WAIT 0
+#define _BL 1
+#define _MS 2
 #define _DK 3
-#define _PW 4
-#define _FN 5
-#define _DC 6
+#define _LD 4
+#define _PW 6
+#define _DC 5 // Unused
+#define _FN 7
+#define _PW_RST 8
+#define _PWE1 9
+#define _PWE2 10
+#define _PW1 11
+#define _PW2 12
+#define _PW3 13
+#define _PW4 14
+#define _PW5 15
+#define _PW6 16
+#define _PW7 17
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -72,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
-    [_BL] = LAYOUT_ortho_5x15( /* QWERTY */
+    [_BL] = LAYOUT_ortho_5x15( /* MOUSE */
 	KC_GESC,	KC_GRAVE,	KC_1,		KC_2,		KC_3,	KC_4,	KC_5,	KC_6,	KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,	KC_EQL,		KC_BSPC, \
 	KC_TAB,		KC_Q,		KC_W,		KC_E,		KC_R,	KC_T,	KC_Y,	KC_U,	KC_I,		KC_O,		KC_P,		KC_LCBR,	KC_RCBR,	KC_BSLASH,	KC_DELETE, \
 	KC_CAPS,	KC_A,		KC_S,		KC_D,		KC_F,	KC_G, 	KC_H,   KC_J,	KC_K,		KC_L,		KC_SCLN,	KC_QUOT,	KC_ENTER,	KC_ENTER,       DF(_MS), \
@@ -80,12 +93,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_LCTL,	MO(_FN),	KC_LGUI,	KC_LALT,	KC_SPC,	KC_SPC,	KC_SPC,	KC_SPC,	KC_RALT,	MO(_PW),	KC_RGUI,	KC_RCTL,	KC_LEFT,	KC_DOWN,	KC_RGHT \
     ),
 
-    [_MS] = LAYOUT_ortho_5x15( /* MOUSE */
+    [_MS] = LAYOUT_ortho_5x15( // QWERTY */ /*
 	KC_GESC,	KC_NO,		KC_MS_ACCEL0,	KC_MS_ACCEL1,	KC_MS_ACCEL2,	KC_NO,	KC_NO,	KC_NO,	KC_NO,	KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_BSPC, \
 	KC_TAB,		KC_MS_BTN1,	KC_MS_UP,	KC_MS_BTN2,	KC_MS_BTN3,KC_MS_BTN4,KC_MS_BTN5,KC_U,	KC_MS_WH_UP,KC_NO,	KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_DELETE, \
 	KC_CAPS,	KC_MS_LEFT,	KC_MS_DOWN,	KC_MS_RIGHT,	KC_NO,	KC_NO, 	KC_NO,   KC_MS_WH_LEFT,KC_MS_WH_DOWN,KC_MS_WH_RIGHT,KC_SCLN,	KC_NO,		KC_ENTER,	KC_ENTER,       DF(_DK), \
 	KC_LSFT,	KC_LSFT,	KC_NO,		KC_NO,		KC_NO,	KC_NO,	KC_NO, 	KC_NO,  KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_UP,		DF(_BL), \
-	KC_LCTL,	MO(_FN),	KC_LGUI,	KC_LALT,	KC_SPC,	KC_SPC,	KC_SPC,	KC_SPC,	KC_RALT,	DF(_BL),	KC_RGUI,	KC_RCTL,	KC_LEFT,	KC_DOWN,	KC_RGHT \
+	KC_LCTL,	MO(_FN),	KC_LGUI,	KC_LALT,	KC_SPC,	KC_SPC,	KC_SPC,	KC_SPC,	KC_RALT,	MO(_PW),	KC_RGUI,	KC_RCTL,	KC_LEFT,	KC_DOWN,	KC_RGHT \
     ),
 
     [_DK] = LAYOUT_ortho_5x15( /* DVORAK */
@@ -105,17 +118,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 
-    [_DC] = LAYOUT_ortho_5x15( /* QWERTY */
-	KC_GESC,	KC_GRAVE,	KC_1,		KC_2,		KC_3,	KC_4,	KC_5,	KC_6,	KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,	KC_EQL,		KC_BSPC, \
-	KC_TAB,		KC_Q,		KC_W,		KC_E,		KC_R,	KC_T,	KC_Y,	KC_U,	KC_I,		KC_O,		KC_P,		KC_LCBR,	KC_RCBR,	KC_BSLASH,	KC_DELETE, \
-	KC_CAPS,	KC_A,		KC_S,		KC_D,		KC_F,	KC_G, 	KC_H,   KC_J,	KC_K,		KC_L,		KC_SCLN,	KC_QUOT,	KC_ENTER,	KC_ENTER,       DF(_BL), \
-	KC_LSFT,	KC_LSFT,	KC_Z,		KC_X,		KC_C,	KC_V,	KC_B, 	KC_N,   KC_M,		KC_MS_BTN1,	KC_MS_BTN2,	KC_MS_BTN2,	KC_RSFT,	KC_UP,		DF(_BL), \
-	KC_LCTL,	MO(_FN),	KC_LGUI,	KC_LALT,	KC_SPC,	KC_SPC,	KC_SPC,	KC_SPC,	KC_RALT,	DF(_BL),	KC_RGUI,	KC_RCTL,	KC_LEFT,	KC_DOWN,	KC_RGHT \
-    ),
-
-
-
-
     [_FN] = LAYOUT_ortho_5x15( /* FUNCTIONAL */
 	KC_GESC,	KC_GRAVE,	KC_F1,		KC_F2,		KC_F3,	KC_F4,	KC_F5,	KC_F6,	KC_F7,		KC_F8,		KC_F9,		KC_F10,		KC_F11,		KC_F12,		KC_BSPC, \
 	KC_TAB,		KC_AUDIO_MUTE,	KC_BRIGHTNESS_UP,KC_E,		KC_F13,	KC_F14,	KC_F15,	KC_F16,	KC_F17,		KC_F18,		KC_F19,		KC_F20,		KC_F21,		KC_F22,		KC_DELETE, \
@@ -126,10 +128,103 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_PW] = LAYOUT_ortho_5x15( /* POWER */
 	RESET,		KC_NO,		KC_NO,		KC_NO,		KC_NO,	KC_NO,	KC_NO,	KC_NO,	KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_BSPC, \
-	KC_TAB,		KC_NO,		KC_NO,		KC_NO,		KC_NO,	KC_NO,	KC_NO,	KC_NO,	KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		UNICODE(0x2630),KC_DELETE, \
-	KC_CAPS,	KC_NO,		KC_SYSTEM_POWER,KC_NO,		KC_SYSTEM_SLEEP,KC_NO,KC_NO,KC_NO,KC_NO,	KC_NO,		UNICODE(0x037E),UNICODE(0x2622),KC_ENTER,	KC_ENTER,       KC_NO, \
-	KC_LSFT,	KC_LSFT,	KC_NO,		KC_NO,		KC_SYSTEM_WAKE,KC_NO,KC_NO,KC_NO,KC_NO,		KC_NO,		KC_NO,		UNICODE(0x037E),KC_RSFT,	UNICODE(0x1403),KC_NO, \
-	KC_LCTL,	DF(_DC),	KC_LGUI,	KC_LALT,	KC_SPC,	KC_SPC,	KC_SPC,	KC_SPC,	KC_RALT,	KC_TRNS,	DF(_DC),	KC_RCTL,	UNICODE(0x140A),UNICODE(0x1401),UNICODE(0x1405) \
+	DF(_PW_WAIT),	KC_NO,		KC_NO,		KC_NO,		KC_NO,	KC_NO,	KC_NO,	KC_NO,	KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		UNICODE(0x2630),KC_DELETE, \
+	KC_CAPS,	KC_NO,		KC_SYSTEM_POWER,KC_NO,		KC_SYSTEM_SLEEP,KC_NO,KC_NO,KC_NO,KC_NO,	KC_NO,		UNICODE(0x037E),UNICODE(0x2622),KC_NO,		KC_NO,		DF(_PW_WAIT), \
+	KC_LSFT,	KC_LSFT,	KC_NO,		KC_NO,		KC_SYSTEM_WAKE,KC_NO,KC_NO,KC_NO,KC_NO,		KC_NO,		KC_NO,		UNICODE(0x037E),KC_RSFT,	UNICODE(0x1403),DF(_PW_WAIT), \
+	KC_LCTL,	KC_NO,		KC_LGUI,	KC_LALT,	KC_SPC,	KC_SPC,	KC_SPC,	KC_SPC,	KC_RALT,	KC_TRNS,	KC_NO,	KC_RCTL,	UNICODE(0x140A),UNICODE(0x1401),UNICODE(0x1405) \
+    ),
+
+
+
+    [_PW_RST] = LAYOUT_ortho_5x15( 
+	RESET,	KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, \
+	KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, \
+	KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, \
+	KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, \
+	KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_TRNS,KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO \
+    ),
+
+    [_PW_WAIT] = LAYOUT_ortho_5x15( 
+	KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, \
+	KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, \
+	KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, \
+	KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO, \
+	KC_NO,  KC_NO,  DF(_PW1),  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  MO(_PW_RST),DF(_PW1),  KC_NO,  KC_NO,  KC_NO,  KC_NO \
+    ),
+
+
+    [_PW1] = LAYOUT_ortho_5x15( 
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW2),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  MO(_PW_RST),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1) \
+    ),
+
+    [_PW2] = LAYOUT_ortho_5x15( 
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW3),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  MO(_PW_RST),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1) \
+    ),
+
+    [_PW3] = LAYOUT_ortho_5x15( 
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW4),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  MO(_PW_RST),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1) \
+    ),
+
+    [_PW4] = LAYOUT_ortho_5x15( 
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW5),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  MO(_PW_RST),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1) \
+    ),
+
+    [_PW5] = LAYOUT_ortho_5x15( 
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW6),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  MO(_PW_RST),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1) \
+    ),
+
+    [_PW6] = LAYOUT_ortho_5x15( 
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW7),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  MO(_PW_RST),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1) \
+    ),
+
+    [_PW7] = LAYOUT_ortho_5x15( 
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PWE1), DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  MO(_PW_RST),  KC_NO,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1) \
+    ),
+
+
+
+    [_PWE1] = LAYOUT_ortho_5x15(
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  MO(_PWE2), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  MO(_PWE2), \
+	DF(_PW1),  DF(_PW1),  MO(_PWE2), DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  MO(_PW_RST),  MO(_PWE2),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1) \
+    ),
+
+    [_PWE2] = LAYOUT_ortho_5x15( 
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1), \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_BL),  DF(_BL),  KC_TRNS, \
+	DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  KC_TRNS, \
+	DF(_PW1),  DF(_PW1),  KC_TRNS,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1),  MO(_PW_RST),  KC_TRNS,  DF(_PW1),  DF(_PW1),  DF(_PW1),  DF(_PW1) \
     )
 
 };
